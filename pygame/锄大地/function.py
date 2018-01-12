@@ -70,7 +70,7 @@ def findpara_cardlist(cardlist):
         shunzi = False
         hua = False
         
-        if leng ==1:
+        if leng == 1:
             matchrule = True
             maxr = cardlist[0].rank
             
