@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  <title>Game</title>
+  <meta charset="utf-8">
+</head>
+
+<body style="text-align: center;">
+  <h2 style="text-align: center;">Simple Game</h2>
+  <form action="choose" method="post">
+    {% csrf_token %}
+    <textarea name="apple" cols="30" rows="10" placeholder="输入名字，随机抽取一个获胜者"></textarea>
+    <div><input type="submit" value="Confirm"></div>
+  </form>
+</body>
