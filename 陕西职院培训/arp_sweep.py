@@ -5,7 +5,7 @@ import sys
 
 from arprequest import ArpRequest
 
-n = '192.168.1.1'
+n = '172.16.6.136'
 lfile = '999.txt'
 
 try:
@@ -21,7 +21,7 @@ with open(lfile, 'w') as f:
         f.write('{} '.format(ip))
         sys.stdout.write('{} '.format(ip))
 
-        req = ArpRequest('{}'.format(ip), iface)
+        req = ArpRequest(str(ip), iface)
         if not req.request():
             f.write('Not ')
             sys.stdout.write('Not ')
