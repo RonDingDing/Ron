@@ -33,6 +33,7 @@ def main(data):
         for value in values:
             group.send(value)
         group.send(None)
+    
     report(results)
 
 

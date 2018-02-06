@@ -1,17 +1,4 @@
-from collections import namedtuple
-
-Customer = namedtuple("Customer", "name fidelity")
-
-
-class LineItem:
-
-    def __init__(self, product, quantity, price):
-        self.product = product
-        self.quantity = quantity
-        self.price = price
-
-    def total(self):
-        return self.price * self.quantity
+promolist = []
 
 
 class Order:  # 上下文
@@ -38,12 +25,13 @@ class Order:  # 上下文
         return fmt.format(self.total(), self.due())
 
 
-def fidelity_promo(order):
-    """为积分为1000或以上的顾客提供5%折扣"""
-    return order.total() * 0.05 if order.customer.fidelity >= 1000 else 0
+def register(promo_func):
+    promolist.append(promo_func)
+    return promo_func
 
 
-def bulk_item_promo(order):
+@register
+def bulk_item(order):
     """单个商品为20个或以上时提供10%折扣"""
     discount = 0
     for item in order.cart:
@@ -52,7 +40,14 @@ def bulk_item_promo(order):
     return discount
 
 
-def large_order_promo(order):
+@register
+def fidelity(order):
+    """为积分为100以上的顾客提供5%折扣"""
+    return order.total() * 0.05 if order.customer.fidelity >= 1000 else 0
+
+
+@register
+def large_order(order):
     """订单中的不同商品达到10个或以上时提供7%折扣"""
     distinct_items = {item.product for item in order.cart}
     if len(distinct_items) >= 10:
@@ -60,13 +55,6 @@ def large_order_promo(order):
     return 0
 
 
-joe = Customer('John Doe', 0)
-ann = Customer('Ann Smith', 1100)
-cart = [LineItem('banana', 4, .5), LineItem('apple', 10, 1.5), LineItem('watermellon', 5, 5.0)]
-print(Order(joe, cart, fidelity_promo))
-print(Order(ann, cart, fidelity_promo))
-banana_cart = [LineItem('banana', 30, .5),  LineItem('apple', 10, 1.5)]
-print(Order(joe, banana_cart, bulk_item_promo))
-long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
-print(Order(joe, long_order, large_order_promo))
-print(Order(joe, cart, large_order_promo))
+def best_promo(order):
+    """选择可用的最佳折扣"""
+    return max(promo(order) for promo in promolist)
