@@ -30,7 +30,7 @@ if __name__ == "__main__":
     ##Running register(<function f1 at 0x02BBC930>)
     ##Running register(<function f2 at 0x02BBC8E8>)
     ##import时装饰函数已经运行，而被装饰函数没有运行
-    registration.registry 
+    ## registration.registry 
     #[<function f1 at 0x02BBC930>, <function f2 at 0x02BBC8E8>]
 
 
