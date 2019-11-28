@@ -75,7 +75,6 @@ import subprocess
 
 obj = subprocess.Popen("mkdir t3", shell=True, cwd='/home/dev',)
 
-复制
 import subprocess
 
 obj = subprocess.Popen(["python"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
