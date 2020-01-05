@@ -161,8 +161,7 @@ def main():
         time.sleep(3)
         sys.exit(0)
 
-    if len(real_title_list) ==0:
-        print("\n无法下载任一篇文章，也许您的软件已过期，请与软件作者联系。")
+ 
 
                 
     for each in range(len(newinfo)):
