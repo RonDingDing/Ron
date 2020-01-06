@@ -1,7 +1,6 @@
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField, IntegerField
-from ..models import CostType, ProductType, Product
+from rest_framework.serializers import FloatField, DateTimeField
 from ..baseserializer import DynamicFieldsModelSerializer
-
+from ..models import CostType, ProductType, Product, Unit
 
 
 class CostTypeSerializer(DynamicFieldsModelSerializer):
@@ -16,9 +15,27 @@ class ProductTypeSerializer(DynamicFieldsModelSerializer):
         fields = '__all__'
 
 
-class ProductSerializer(DynamicFieldsModelSerializer):
-    types = PrimaryKeyRelatedField(queryset=ProductType.objects.all())
-    
+class UnitSerializer(DynamicFieldsModelSerializer):
+    class Meta:
+        model = Unit
+        fields = '__all__'
+
+
+class ProductCreateSerializer(DynamicFieldsModelSerializer):
+    price = FloatField()
+
+    def validate_price(self, price):
+        return price * 100
+
+    class Meta:
+        model = Product
+        exclude = ['_price', 'insert_time', 'old']
+
+
+class ProductListRetrieveSerializer(DynamicFieldsModelSerializer):
+    types = ProductTypeSerializer(read_only=True)
+    insert_time = DateTimeField(format="%Y-%m-%d %H:%M:%S" )
+
     class Meta:
         model = Product
         fields = '__all__'
