@@ -23,7 +23,7 @@ class Product(models.Model):
     old = models.BooleanField(default=False, verbose_name='是否旧价格')
 
     def __str__(self):
-        return ', '.join([self.name, str(self.price)])
+        return ', '.join([self.name, str(self.price), str(self.pk)])
 
     @property
     def price(self):
@@ -33,9 +33,12 @@ class Product(models.Model):
     def price(self, val):
         self._price = val
 
+class Item(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET(default_product_type), verbose_name='产品')
+    number = models.IntegerField(default=0, verbose_name='数量')
 
 class Order(models.Model):
-    products = models.ManyToManyField(Product, verbose_name='产品')
+    cart = models.ManyToManyField(Item, verbose_name='购物车')
     sale_time = models.DateTimeField(auto_now_add=True, verbose_name='销售时间' )
     state = models.IntegerField(choices=[(0, "未结清"), (1, "已结清")], default=1)
     revenue = models.FloatField(verbose_name='收入')

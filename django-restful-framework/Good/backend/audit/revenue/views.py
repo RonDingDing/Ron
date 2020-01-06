@@ -1,7 +1,8 @@
 from restframework_datachange.viewsets import RModelViewSet
-from ..models import Order
+from ..models import Order, Product, Item
 from .serializers import OrderListRetrieveSerializer, OrderCreateSerializer
 import datetime
+from collections import defaultdict
 from pytz import timezone
 from django.conf import settings
 
@@ -21,7 +22,22 @@ class RevenueViewSet(RevenueAdjust, RModelViewSet):
             return OrderCreateSerializer
         return OrderListRetrieveSerializer
 
-    def perform_create(self, serializer):
-        dic = {'revenue': sum(product.price for product in serializer.validated_data['products'])}
-        serializer.validated_data.update(dic)
-        serializer.save()
+    # def create(self, request, *args, **kwargs):
+    #     cart_dic = defaultdict(int)
+    #     revenue = 0
+    #     for i in request.data['cart']:
+    #         has_product = Product.objects.filter(pk=i)
+    #         if has_product:
+    #             product = has_product.first()
+    #             cart_dic[product.id] += 1
+    #             revenue += product.price
+    #
+    #     obj = Order(revenue=revenue)
+    #     for k, v in cart_dic.items():
+    #         obj.cart.add(Item.objects.create(product=k, number=v))
+    #     obj.save()
+
+
+
+
+

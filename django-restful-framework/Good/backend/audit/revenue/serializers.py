@@ -1,10 +1,16 @@
+from rest_framework.serializers import DateTimeField
+
 from ..baseserializer import DynamicFieldsModelSerializer
-from rest_framework.serializers import DateTimeField, SlugField
 from ..models import Order, Product
-from audit.management.serializers import ProductListRetrieveSerializer
+
+
+class ProductSmallSerializer(DynamicFieldsModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price']
 
 class OrderListRetrieveSerializer(DynamicFieldsModelSerializer):
-    products = ProductListRetrieveSerializer(read_only=True, many=True)
+    products = ProductSmallSerializer(read_only=True, many=True)
     sale_time = DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
