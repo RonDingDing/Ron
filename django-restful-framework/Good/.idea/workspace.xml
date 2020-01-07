@@ -2,50 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00136a67-5c24-413b-b892-4b608b3ce3f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/audit/cost/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/audit/cost/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/audit/cost/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/audit/management/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/management/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/audit/management/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/management/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/audit/management/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/management/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/audit/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/audit/migrations/0002_auto_20200105_2252.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/cost/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/cost/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/cost/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/cost/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/cost/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/cost/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/management/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/management/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/management/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/migrations/0002_auto_20200106_1916.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/migrations/0003_auto_20200106_1950.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/audit/migrations/0004_auto_20200106_1952.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/audit/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/audit/revenue/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/revenue/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/audit/revenue/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/revenue/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/audit/revenue/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/audit/revenue/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 16/.idea/Chapter 16.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 16/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 16/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 16/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 6/.idea/Chapter 6.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 6/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 6/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 6/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 7/.idea/Chapter 7.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 7/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 7/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 7/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 8/.idea/Chapter 8.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 8/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 8/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 8/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 9/.idea/Chapter 9.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 9/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../流畅的Python/Chapter 9/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../陕西职院培训/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../陕西职院培训/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../陕西职院培训/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../陕西职院培训/.idea/陕西职院培训.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -54,6 +41,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Python\django-restful-framework\Good\backend\audit" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -66,6 +58,55 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Good" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\XenaDev\AppData\Local\Programs\Python\Python38\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Good" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\XenaDev\AppData\Local\Programs\Python\Python38\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.manage" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -85,10 +126,28 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend/backend/mainviewset.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend/backend/mainviewset.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

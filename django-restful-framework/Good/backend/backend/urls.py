@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .mainviewset import PlanViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('revenue/', include('audit.revenue.urls')),
     path('cost/', include('audit.cost.urls')),
-    path('management/', include('audit.management.urls'))
+    path('member/', include('audit.member.urls')),
+    path('', PlanViewSet.as_view({'get': 'list'}))
 ]

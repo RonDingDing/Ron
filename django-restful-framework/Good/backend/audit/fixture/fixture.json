@@ -1,0 +1,31 @@
+[
+{
+  "model": "audit.costtype",
+  "pk": 0,
+  "fields": {
+    "name": "\u65e0"
+  }
+},
+{
+  "model": "audit.member",
+  "pk": 0,
+  "fields": {
+    "name": "\u65e0",
+    "phone": "\u65e0"
+  }
+},
+{
+  "model": "audit.producttype",
+  "pk": 0,
+  "fields": {
+    "name": "\u65e0"
+  }
+},
+{
+  "model": "audit.unit",
+  "pk": 0,
+  "fields": {
+    "name": "\u65e0"
+  }
+}
+]

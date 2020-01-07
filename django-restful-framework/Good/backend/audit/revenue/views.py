@@ -1,43 +1,51 @@
-from restframework_datachange.viewsets import RModelViewSet
-from ..models import Order, Product, Item
-from .serializers import OrderListRetrieveSerializer, OrderCreateSerializer
-import datetime
-from collections import defaultdict
-from pytz import timezone
-from django.conf import settings
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
-class RevenueAdjust(object):
-    def change_sale_time(self, value):
+from .serializers import OrderListRetrieveSerializer, OrderCreateSerializer, OrderUpdateSerializer, \
+    ProductTypeSerializer, ProductCreateSerializer, ProductListRetrieveSerializer
+from ..baseviewset import NoDeleteNoModifyModelViewSet
+from ..models import Order, Product, ProductType
 
-        timetuple = datetime.datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
-        local_time = timezone(settings.TIME_ZONE).localize(timetuple)
-        time_string = local_time.strftime('%Y-%m-%d %H:%M:%S')
-        return time_string
 
-class RevenueViewSet(RevenueAdjust, RModelViewSet):
+class RevenueViewSet(ModelViewSet):
     queryset = Order.objects.all()
 
     def get_serializer_class(self):
         if self.action == 'create':
             return OrderCreateSerializer
+        elif self.action in ['update', 'partial_update']:
+            return OrderUpdateSerializer
         return OrderListRetrieveSerializer
 
-    # def create(self, request, *args, **kwargs):
-    #     cart_dic = defaultdict(int)
-    #     revenue = 0
-    #     for i in request.data['cart']:
-    #         has_product = Product.objects.filter(pk=i)
-    #         if has_product:
-    #             product = has_product.first()
-    #             cart_dic[product.id] += 1
-    #             revenue += product.price
-    #
-    #     obj = Order(revenue=revenue)
-    #     for k, v in cart_dic.items():
-    #         obj.cart.add(Item.objects.create(product=k, number=v))
-    #     obj.save()
+
+class ProducttypeViewSet(NoDeleteNoModifyModelViewSet):
+    queryset = ProductType.objects.all()
+    serializer_class = ProductTypeSerializer
+
+    def perform_create(self, serializer):
+        serializer.Meta.model.objects.get_or_create(**serializer.validated_data)
 
 
+class ProductViewSet(NoDeleteNoModifyModelViewSet):
+    queryset = Product.objects.filter(old=False)
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ProductCreateSerializer
+        return ProductListRetrieveSerializer
+
+    def perform_create(self, serializer):
+        filter_dic = {'name': serializer.validated_data['name']}
+        serializer.Meta.model.objects.filter(**filter_dic).update(old=True)
+        serializer.save()
 
 
+class ProductPlanViewSet(GenericViewSet):
+    def list(self, request, *args, **kwargs):
+        return Response({
 
+            '收入': str(request._request._current_scheme_host) + '/revenue/revenue/',
+            '产品': str(request._request._current_scheme_host) + '/revenue/product/',
+            '产品类型': str(request._request._current_scheme_host) + '/revenue/producttype/',
+
+        })
