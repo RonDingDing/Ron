@@ -1,7 +1,7 @@
 from rest_framework.serializers import DateTimeField, SlugRelatedField, FloatField
 
 from ..baseserializer import DynamicFieldsModelSerializer
-from ..models import Order, Product, Item, ProductType
+from ..models import Order, Product,  ProductType
 
 
 class ProductSmallSerializer(DynamicFieldsModelSerializer):
@@ -10,23 +10,16 @@ class ProductSmallSerializer(DynamicFieldsModelSerializer):
         fields = ['id', 'name', 'price']
 
 
-class ItemSerializer(DynamicFieldsModelSerializer):
-    product = SlugRelatedField(slug_field='name', read_only=True)
-
-    class Meta:
-        model = Item
-        exclude = ['id']
-
 
 class OrderListRetrieveSerializer(DynamicFieldsModelSerializer):
-    cart = ItemSerializer(read_only=True, many=True)
-    products = ProductSmallSerializer(read_only=True, many=True)
-    sale_time = DateTimeField(format="%Y-%m-%d %H:%M:%S")
     revenue = FloatField()
+    member = SlugRelatedField(slug_field='name', read_only=True)
+    product = SlugRelatedField(slug_field='name', read_only=True)
+    sale_time = DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = Order
-        fields = '__all__'
+        exclude = ['id', ]
 
 class OrderCreateSerializer(DynamicFieldsModelSerializer):
     class Meta:

@@ -3,7 +3,9 @@ from rest_framework.viewsets import GenericViewSet
 
 from .serializers import MemberSerializer
 from ..baseviewset import NoDeleteNoModifyModelViewSet
-from ..models import Member
+from ..models import Member, Coupon
+from rest_framework.viewsets import ModelViewSet
+from .serializers import CouponCreateSerializer, CouponListRetrieveSerializer, CouponUpdateSerializer
 
 
 class MemberViewSet(NoDeleteNoModifyModelViewSet):
@@ -14,7 +16,15 @@ class MemberViewSet(NoDeleteNoModifyModelViewSet):
         serializer.Meta.model.objects.get_or_create(**serializer.validated_data)
 
 
-CouponViewSet = MemberViewSet
+class CouponViewSet(ModelViewSet):
+    queryset = Coupon.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return CouponCreateSerializer
+        elif self.action in ['update', 'partial_update']:
+            return CouponUpdateSerializer
+        return CouponListRetrieveSerializer
 
 
 class MemberPlanViewSet(GenericViewSet):

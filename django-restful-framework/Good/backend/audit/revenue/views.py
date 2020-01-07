@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from restframework_datachange.viewsets import RModelViewSet
 
 from .serializers import OrderListRetrieveSerializer, OrderCreateSerializer, OrderUpdateSerializer, \
     ProductTypeSerializer, ProductCreateSerializer, ProductListRetrieveSerializer
@@ -7,7 +8,28 @@ from ..baseviewset import NoDeleteNoModifyModelViewSet
 from ..models import Order, Product, ProductType
 
 
-class RevenueViewSet(ModelViewSet):
+class RevenueAdjust:
+    def relist_data(self, data):
+        lst = []
+        for order_id in {i['order_id'] for i in data}:
+            all_products = []
+            revenue = 0
+            objs = [i for i in data if i['order_id'] == order_id]
+            for obj in objs:
+                print(obj)
+                all_products.append({'number': obj['number'],
+                                     'product': obj['product']})
+                revenue += obj['revenue']
+                dic = {'order_id': order_id, 'all_products': all_products, 'sale_time': objs[0]['sale_time'],
+                   'state': objs[0]['state'], 'discount': objs[0]['discount'], 'member': objs[0]['member'],
+                   'revenue': revenue
+                   }
+            lst.append(dic)
+
+        return lst
+
+
+class RevenueViewSet(RevenueAdjust, RModelViewSet):
     queryset = Order.objects.all()
 
     def get_serializer_class(self):
@@ -17,6 +39,18 @@ class RevenueViewSet(ModelViewSet):
             return OrderUpdateSerializer
         return OrderListRetrieveSerializer
 
+    def perform_create(self, serializer):
+        product = serializer.validated_data['product']
+        order_id = serializer.validated_data['order_id']
+        number = serializer.validated_data['number']
+        found = False
+        for obj in serializer.Meta.model.objects.filter(order_id=order_id):
+            if obj.product == product:
+                obj.number += number
+                obj.save()
+                found = True
+        if not found:
+            serializer.save()
 
 class ProducttypeViewSet(NoDeleteNoModifyModelViewSet):
     queryset = ProductType.objects.all()

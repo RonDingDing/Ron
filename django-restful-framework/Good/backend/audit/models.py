@@ -47,27 +47,21 @@ def default_product():
 
 
 
-@receiver(post_save, sender=Product)
-def post_save_product_receiver(sender, instance, *args, **kwargs):
-    if instance.id != 0:
-        for number in range(1, 11):
-            Item.objects.get_or_create(product=instance, number=number)
+# @receiver(post_save, sender=Product)
+# def post_save_product_receiver(sender, instance, *args, **kwargs):
+#     if instance.id != 0:
+#         for number in range(1, 11):
+#             Item.objects.get_or_create(product=instance, number=number)
 
 
-
-class Item(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET(default_product), verbose_name='产品')
-    number = models.IntegerField(default=0, verbose_name='数量')
-
-    def __str__(self):
-        return str(self.product.name) + ' * ' + str(self.number) + ' = ' + \
-               str(self.product._price * self.number / 100)
 
 
 class Member(models.Model):
     name = models.CharField(max_length=200, verbose_name='名称', unique=True)
     phone = models.CharField(max_length=200, verbose_name='手机')
 
+    def __str__(self):
+        return self.name
 
 def default_member():
     return Member.objects.get_or_create(name='无', phone='无', id=0)[0]
@@ -80,15 +74,23 @@ def default_member():
 
 
 class Order(models.Model):
-    cart = models.ManyToManyField(Item, verbose_name='购物车')
+    order_id = models.IntegerField(default=0, verbose_name='订单ID')
+    product = models.ForeignKey(Product, on_delete=models.SET(default_product), verbose_name='产品')
+    number = models.IntegerField(default=0, verbose_name='数量')
     sale_time = models.DateTimeField(auto_now_add=True, verbose_name='销售时间' )
     state = models.IntegerField(choices=[(0, "未结清"), (1, "已结清")], default=1)
     discount = models.FloatField(verbose_name='折扣', default=1)
     member = models.ForeignKey(Member, on_delete=models.SET(default_member), verbose_name='会员')
 
+    def __str__(self):
+        return str(self.order_id) + ' ' + str(self.product.name) + ' * ' + str(self.number) + ' = ' + \
+               str(self.product._price * self.number / 100)
+
+
+
     @property
     def revenue(self):
-        return sum(i.product._price * i.number for i in self.cart.all()) * self.discount / 100
+        return self.product._price * self.number * self.discount / 100
 
 class CostType(models.Model):
     name = models.CharField(max_length=50, verbose_name='成本类型')
@@ -148,12 +150,17 @@ class Cost(models.Model):
 
 class CouponItem(models.Model):
     name = models.CharField(max_length=200, verbose_name='名称', default='')
-    number = models.IntegerField(default=0)
+
 
     def __str__(self):
         return str(self.name) + ' * ' + str(self.number)
 
+def default_coupon_item():
+    return CouponItem.objects.get_or_create(name='无', id=0)[0]
+
 
 class Coupon(models.Model):
-    id = models.ForeignKey(Member, on_delete=models.SET(default_member), primary_key=True )
-    coupon_item = models.ManyToManyField(CouponItem)
+    user = models.ForeignKey(Member, on_delete=models.SET(default_member), verbose_name='用户')
+    coupon = models.ForeignKey(CouponItem, on_delete=models.SET(default_coupon_item), verbose_name='优惠券')
+    number = models.IntegerField(default=0, verbose_name='数量')
+    exchange = models.IntegerField(default=0, verbose_name='兑换次数')
