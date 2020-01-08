@@ -1,11 +1,12 @@
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.viewsets import   GenericViewSet
 from restframework_datachange.viewsets import RModelViewSet
 
 from .serializers import OrderListRetrieveSerializer, OrderCreateSerializer, OrderUpdateSerializer, \
     ProductTypeSerializer, ProductCreateSerializer, ProductListRetrieveSerializer
 from ..baseviewset import NoDeleteNoModifyModelViewSet
 from ..models import Order, Product, ProductType
+from .filterclass import ProductFilter, ProductTypeFilter, OrderFilter
 
 
 class RevenueAdjust:
@@ -16,21 +17,21 @@ class RevenueAdjust:
             revenue = 0
             objs = [i for i in data if i['order_id'] == order_id]
             for obj in objs:
-                print(obj)
                 all_products.append({'number': obj['number'],
                                      'product': obj['product']})
                 revenue += obj['revenue']
-                dic = {'order_id': order_id, 'all_products': all_products, 'sale_time': objs[0]['sale_time'],
-                   'state': objs[0]['state'], 'discount': objs[0]['discount'], 'member': objs[0]['member'],
-                   'revenue': revenue
-                   }
+            dic = {'order_id': order_id, 'all_products': all_products, 'sale_time': objs[0]['sale_time'],
+               'state': objs[0]['state'], 'discount': objs[0]['discount'], 'member': objs[0]['member'],
+               'revenue': revenue
+               }
             lst.append(dic)
 
         return lst
 
 
 class RevenueViewSet(RevenueAdjust, RModelViewSet):
-    queryset = Order.objects.all()
+    queryset = Order.objects.order_by('-sale_time')
+    filter_class = OrderFilter
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -53,15 +54,17 @@ class RevenueViewSet(RevenueAdjust, RModelViewSet):
             serializer.save()
 
 class ProducttypeViewSet(NoDeleteNoModifyModelViewSet):
-    queryset = ProductType.objects.all()
+    queryset = ProductType.objects.order_by('pk')
     serializer_class = ProductTypeSerializer
+    filter_class = ProductTypeFilter
 
     def perform_create(self, serializer):
         serializer.Meta.model.objects.get_or_create(**serializer.validated_data)
 
 
 class ProductViewSet(NoDeleteNoModifyModelViewSet):
-    queryset = Product.objects.filter(old=False)
+    queryset = Product.objects.filter(old=False).order_by('-insert_time')
+    filter_class = ProductFilter
 
     def get_serializer_class(self):
         if self.action == 'create':

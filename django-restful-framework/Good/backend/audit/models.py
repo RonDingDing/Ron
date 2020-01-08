@@ -58,7 +58,7 @@ def default_product():
 
 class Member(models.Model):
     name = models.CharField(max_length=200, verbose_name='名称', unique=True)
-    phone = models.CharField(max_length=200, verbose_name='手机')
+    phone = models.CharField(max_length=200, verbose_name='手机', unique=True)
 
     def __str__(self):
         return self.name
@@ -153,7 +153,7 @@ class CouponItem(models.Model):
 
 
     def __str__(self):
-        return str(self.name) + ' * ' + str(self.number)
+        return str(self.name)
 
 def default_coupon_item():
     return CouponItem.objects.get_or_create(name='无', id=0)[0]

@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
+from .filterclass import CostTypeFilter, UnitFilter, CostFilter
 from .serializers import CostListRetrieveSerializer, CostCreateSerializer, CostUpdateSerializer, CostTypeSerializer, \
     UnitSerializer
 from ..baseviewset import NoDeleteNoModifyModelViewSet
@@ -8,7 +9,8 @@ from ..models import Cost, CostType, Unit
 
 
 class CostViewSet(ModelViewSet):
-    queryset = Cost.objects.all()
+    queryset = Cost.objects.order_by('-buy_time')
+    filter_class = CostFilter
     def get_serializer_class(self):
         if self.action == 'create':
             return CostCreateSerializer
@@ -17,17 +19,19 @@ class CostViewSet(ModelViewSet):
         return CostListRetrieveSerializer
 
 
-class CostTypeViewSet(ModelViewSet):
-    queryset = CostType.objects.all()
+class CostTypeViewSet(NoDeleteNoModifyModelViewSet):
+    queryset = CostType.objects.order_by('pk')
     serializer_class = CostTypeSerializer
+    filter_class = CostTypeFilter
 
     def perform_create(self, serializer):
         serializer.Meta.model.objects.get_or_create(**serializer.validated_data)
 
 
 class UnitViewSet(NoDeleteNoModifyModelViewSet):
-    queryset = Unit.objects.all()
+    queryset = Unit.objects.order_by('pk')
     serializer_class = UnitSerializer
+    filter_class = UnitFilter
 
     def perform_create(self, serializer):
         serializer.Meta.model.objects.get_or_create(**serializer.validated_data)
