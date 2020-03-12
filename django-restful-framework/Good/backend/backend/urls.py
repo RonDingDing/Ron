@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .mainviewset import PlanViewSet
+from rest_framework_jwt.views import obtain_jwt_token
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('revenue/', include('audit.revenue.urls')),
     path('cost/', include('audit.cost.urls')),
     path('member/', include('audit.member.urls')),
-    path('', PlanViewSet.as_view({'get': 'list'}))
+    path('', PlanViewSet.as_view({'get': 'list'})),
+    path('api-token-auth/', obtain_jwt_token),
 ]
