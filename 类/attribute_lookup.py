@@ -1,21 +1,6 @@
 from typing import Any
 
 
-class A:
-    def __init__(self) -> None:
-        self.__happy = "1"
-        self.__not_happy = "2"
-
-    @property
-    def happy(self):
-        return self.__happy
-
-    def __getattr__(self, name: str) -> Any:
-        key = f"_{type(self).__name__}__{name}"
-        if key in self.__dict__:
-            return self.__dict__[key]
-
-
 # coding=utf-8
 class DataDescriptor(object):
     def __init__(self, init_value):
@@ -82,11 +67,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-# if __name__ == "__main__":
-#     a = A()
-#     print(a.not_happy)
-
-
 
 # 按照python doc，如果obj是某个类的实例，那么obj.name（以及等价的getattr(obj,'name')）首先调用__getattribute__。如果类定义了__getattr__方法，那么在__getattribute__抛出 AttributeError 的时候就会调用到__getattr__，而对于描述符(__get__)的调用，则是发生在__getattribute__内部的。官网文档是这么描述的
 
@@ -105,4 +85,4 @@ if __name__ == "__main__":
 
 #     （4）如果Clz有__getattr__方法，调用__getattr__方法，否则
 
-#     （5）抛出AttributeError 
+#     （5）抛出AttributeError
