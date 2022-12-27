@@ -1,0 +1,19 @@
+打开config.ini文件，配置。请参照每一项 # 后的说明
+
+[Driver]
+timeout=20 # 这里填一个数字，表示浏览器多久没有响应会关闭
+thread_num=5 # 这里填一个数字，表示开多少个浏览器爬取
+
+[Frequency]
+num=1    # 这里填一个数字
+unit=minute # 这里填minute、hour、day或week，与上一个参数形成爬取间隔，如num=1，unit=day就是每隔一天进行一次爬取，从执行程序开始计算
+
+[Public]
+targets=奔跑中的奶酪 六神磊磊读金庸  # 这里填一系列公众号名称或公众号number，用空格隔开
+output=C:/Users/Administrator/Desktop/2/ # 这里填输出文件夹路径，路径分隔符请用/
+scrap_num=10 # 这里填一个数字，表示每个公众号爬前多少篇文章
+
+[Types]
+types=刺猬 来稿  # 这里填一系列用于分类的关键词，用空格隔开
+
+完成配置后，保存config.ini，点击scrap.exe，在微信上登陆带有公众号的微信号，然后用手机扫描二维码
